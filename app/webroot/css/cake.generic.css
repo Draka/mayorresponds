@@ -737,3 +737,13 @@ pre {
 #url-rewriting-warning {
 	display:none;
 }
+
+
+/****Add for Mayor Responds****/
+.hide {
+    display: none;
+}
+
+.clean{
+    cursor: pointer;
+}

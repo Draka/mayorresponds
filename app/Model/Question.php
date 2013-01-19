@@ -159,4 +159,12 @@ class Question extends AppModel {
 		)
 	);
 
+    public function beforeSave($options = array()) {
+        if (empty($this->data['Question']['id'])) {
+            $this->data['Question']['key_confirm'] = substr(md5(time()), 0, 16);
+        }
+
+        return true;
+    }
+
 }

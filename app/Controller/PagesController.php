@@ -31,7 +31,9 @@ App::uses('AppController', 'Controller');
  */
 class PagesController extends AppController {
 
-/**
+    public $helpers = array ('CreateQuestions');
+
+    /**
  * Controller name
  *
  * @var string
