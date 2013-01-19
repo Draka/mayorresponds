@@ -1,0 +1,12 @@
+/www.pid
+.settings
+.metadata
+.buildpath
+.project
+*/tmp
+*/tmp/*
+*/tmp/*/
+nbproject
+/lib/Cake/Console/Templates/skel/tmp/
+.LCKindex.php~
+/app/Config/database.php
