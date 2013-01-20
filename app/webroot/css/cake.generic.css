@@ -129,8 +129,13 @@ div.marco{
     box-shadow:  3px 3px 3px 3px rgba(125, 125, 125, 0.5);
 
 }
+div.question-wrapper{
+    width: 30%;
+    float: left;
+    min-width: 320px;
+}
+
 div.questions{
-    position: fixed;
     max-width: 450px;
     padding:10px 20px;
     margin:0 auto 0 auto;
@@ -801,7 +806,8 @@ pre {
 }
 
 .cleanTop50{
-    margin-top: 50px !important;
+    /*margin-top: 50px !important;*/
+    margin-left: 510px;
 }
 
 .vote, .vote_no{
@@ -984,5 +990,12 @@ box-shadow:0px 0px 10px 2px #777777;
 
 /*  Nuevo */
 .instructions {
-    margin-left: 510px;
+
+}
+
+.right-col{
+    float: left;
+width: 60%;
+margin-left: 20px;
+min-width: 320px;
 }
