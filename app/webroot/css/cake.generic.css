@@ -121,6 +121,7 @@ div.view{
     margin:0 auto 0 auto;
 }
 div.marco{
+    margin-bottom: 30px;
     border: 1px #000 solid;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
