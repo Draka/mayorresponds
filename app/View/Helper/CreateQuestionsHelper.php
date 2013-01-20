@@ -124,7 +124,7 @@ class CreateQuestionsHelper extends AppHelper {
         ?>
         <div class="question-wrapper">
             <div class="questions marco">
-                <h1><?php echo __('Make your Question') ?></h1>
+                <h1><?php echo __('Ask your Question') ?></h1>
                 <?php
                 echo $this->Form->create('Question', array('url' => '/questions/add'));
 
