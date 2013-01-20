@@ -121,6 +121,7 @@ div.view{
     margin:0 auto 0 auto;
 }
 div.marco{
+    background-color: rgba(255,255,255,0.6);
     margin-bottom: 30px;
     border: 1px #000 solid;
     -webkit-border-radius: 5px;
@@ -343,7 +344,7 @@ fieldset fieldset div {
 }
 form div {
     clear: both;
-    margin-bottom: 1em;
+    margin-bottom: 0em; /* before value 1*/
     padding: .5em;
     vertical-align: text-top;
 }
