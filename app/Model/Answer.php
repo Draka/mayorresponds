@@ -85,7 +85,7 @@ class Answer extends AppModel {
 		)
 	);
         public function beforeSave($options = array()) {
-        if (empty($this->data['Answer']['id'])) {
+        if (empty($this->data['Answer']['id'] ) && empty($this->data['Answer']['confirm'])) {
             $this->data['Answer']['key_confirm'] = substr(md5(time()), 0, 16);
         }
 
