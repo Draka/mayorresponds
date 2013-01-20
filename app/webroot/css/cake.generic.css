@@ -180,6 +180,9 @@ div.menu {
     font-size: 28px;
     line-height: 30px;
     margin-left: 0;
+    text-align: center;
+    font-size: 36px;
+    line-height: 18px;
 }
 
 .logo span {
@@ -994,9 +997,18 @@ pre {
     background: none;
 }
 .instructions p {
-    font-size: 11px;
+    font-size: 12pt;
+    text-align: justify;
+    margin: 5px;
+}
+.instructions .c1{
     color: rgb(133, 129, 129);
-    line-height: 
+    margin-bottom: 12pt;
+
+}
+.instructions h3{
+    text-align: center;
+    margin: 10px 0;
 }
 .right-col{
     float: left;
@@ -1018,4 +1030,16 @@ pre {
         margin-left: 0px;
 
     }
+}
+
+.title {
+    border-bottom: 1px #bbb solid;
+    text-align: center;
+    font-size: 230%;
+    margin-bottom: 10px;
+}
+
+
+.cleanButtom50{
+    margin-bottom: 50px;
 }

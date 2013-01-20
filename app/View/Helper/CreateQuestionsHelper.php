@@ -8,7 +8,7 @@ class CreateQuestionsHelper extends AppHelper {
     public function details($question, $ext = false) {
         ?>
         <div class="marco form cleanTop50">
-            <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
+            <h1><?php echo __('%s\'s mayor please answer:', $question['City']['name']) ?></h1>
             <table cellpadding="0" cellspacing="0" class="tQuestion">
                 <tr>
                     <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
@@ -18,9 +18,7 @@ class CreateQuestionsHelper extends AppHelper {
                             <?php echo $this->Html->link($question['Question']['question'], '/questions/' . $question['Question']['id']); ?>
                         </div>
                         <div class="meta">
-                            <?php echo $this->Html->link($question['City']['name'], '/cities/' . $question['City']['name']); ?> -
-                            <?php echo $question['City']['country_code']; ?>
-                            [<?php echo $question['Question']['created']; ?>]
+                            <small>by <?php echo $question['User']['name']; ?>, from <?php echo $this->Html->link($question['City']['name'], '/cities/' . $question['City']['name']); ?>. Created:  <?php echo $question['Question']['created']; ?>.</small>
 
                         </div>
                     </td>
@@ -105,7 +103,10 @@ class CreateQuestionsHelper extends AppHelper {
                                     <?php echo $this->Html->link(sprintf('%s\'s mayor: %s', $question['City']['name'], $question['Question']['question']), '/questions/' . $question['Question']['id']); ?>
                                 </div>
                                 <div class="meta">
-                                    <small>by <?php echo $question['User']['name']; ?>, from <?php echo $question['City']['country_code']; ?>. Created:  <?php echo $question['Question']['created']; ?>.</small>
+                                    <?php echo $this->Html->link($question['City']['name'], '/cities/' . $question['City']['name']); ?> -
+                                    <?php echo $question['City']['country_code']; ?>
+                                    [<?php echo $question['Question']['created']; ?>]
+
                                 </div>
                             </td>
                             <td><div class="report"><?php echo $this->Html->link(__('Report'), '/questions/report/' . $question['Question']['id']) ?></div></td>
@@ -123,7 +124,7 @@ class CreateQuestionsHelper extends AppHelper {
         ?>
         <div class="question-wrapper">
             <div class="questions marco">
-                <h1><?php echo __('Make your Question') ?></h1>
+                <h1><?php echo __('Ask your Question') ?></h1>
                 <?php
                 echo $this->Form->create('Question', array('url' => '/questions/add'));
 
@@ -146,6 +147,11 @@ class CreateQuestionsHelper extends AppHelper {
                     'value' => '0'
                 ));
 
+                echo $this->Form->input('facebook_email', array(
+                    'type' => 'hidden',
+                    'value' => ''
+                ));
+
                 echo $this->Form->input('question', array(
                     'type' => 'textarea',
                     'label' => __('Question:'),
@@ -166,7 +172,9 @@ class CreateQuestionsHelper extends AppHelper {
                     'label' => __('Your email:'),
                     'class' => 'required',
                     'maxlength' => 100,
-                    'div' => array('class' => 'input required')
+                    'div' => array('class' => 'input required'),
+                    'after' => '<div class="never">' . __('your name and email will never be shown.') . '</div>'
+
                 ));
 
 
@@ -240,8 +248,8 @@ class CreateQuestionsHelper extends AppHelper {
             </div>
             <div class="instructions marco">
                 <h2>How it works</h2>
-                <p>Quien no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, un simple u eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, Por favor sea mesurado y especifico, la ciudadania sabra agradecerlo.</p>
-                <p>Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
+                <p class="c1">¿Qui&eacute;n no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, una simple eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, por favor se mesurado y especifico, la ciudadanía sabr&aacute; agradecerlo</p>
+                <p class="c2">Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
                 <h3><a href="">Post a question now!</a></h3>
             </div>
         </div>

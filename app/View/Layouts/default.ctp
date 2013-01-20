@@ -54,7 +54,7 @@ $cakeDescription = __('Mayor Responds');
     <body>
         <div id="container">
             <div id="header">
-                <div class="logo">Mayor<span>Responds</span>.</div>
+                <div class="logo">Mayor<span>Responds</span>.org</div>
                 <div class="menu">
                     <table>
                         <tr>
@@ -70,6 +70,9 @@ $cakeDescription = __('Mayor Responds');
             <div id="content">
 
                 <?php echo $this->Session->flash(); ?>
+                <div class="title">
+                <?php echo $title_for_layout; ?>
+                </div>
                 <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
@@ -78,5 +81,18 @@ $cakeDescription = __('Mayor Responds');
         </div>
         <?php echo $this->Facebook->init(); ?>
         <?php echo $this->fetch('scripts_footer'); ?>
+        <script type="text/javascript">
+
+          var _gaq = _gaq || [];
+          _gaq.push(['_setAccount', 'UA-21230789-4']);
+          _gaq.push(['_trackPageview']);
+
+          (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+          })();
+
+         </script>
     </body>
 </html>

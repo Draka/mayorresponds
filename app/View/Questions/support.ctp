@@ -1,10 +1,9 @@
 <?php
 if ($question) {
-    $this->CreateQuestions->details($question, true);
     ?>
 
 
-    <div class="questions form marco cleanTop50">
+    <div class="questions form marco">
         <h1><?php echo __('I want to support this question for the mayor responds') ?></h1>
         <?php
         echo $this->Form->create('Support', array('url' => '/questions/support/' . $question['Question']['id']));
@@ -27,7 +26,8 @@ if ($question) {
             'label' => __('Your email:'),
             'class' => 'required',
             'maxlength' => 100,
-            'div' => array('class' => 'input required')
+            'div' => array('class' => 'input required'),
+            'after' => '<div class="never">' . __('your name and email will never be shown.') . '</div>'
         ));
 
         echo $this->Form->input(__('I support'), array(
@@ -52,7 +52,9 @@ if ($question) {
         <?php $this->end() ?>
 
     </div>
+    <div class="cleanButtom50"></div>
     <?php
+    $this->CreateQuestions->details($question, true);
 } else {
     $this->CreateQuestions->form();
 }
