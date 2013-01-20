@@ -30,9 +30,9 @@
  * ...and connect the rest of 'Pages' controller's urls.
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
-    Router::connect('/questions/:id', array('controller' => 'questions', 'action' => 'view'), array('pass' => array('id'), 'id' => '[1-9]*'));
-    Router::connect('/plus/:id', array('controller' => 'answers', 'action' => 'plus'), array('pass' => array('id'), 'id' => '[1-9]*'));
-    Router::connect('/minus/:id', array('controller' => 'answers', 'action' => 'minus'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/questions/:id', array('controller' => 'questions', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));
+    Router::connect('/plus/:id', array('controller' => 'answers', 'action' => 'plus'), array('pass' => array('id'), 'id' => '.*'));
+    Router::connect('/minus/:id', array('controller' => 'answers', 'action' => 'minus'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/vote/:id', array('controller' => 'answers', 'action' => 'vote_key'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/answers/add', array('controller' => 'answers', 'action' => 'add'));
     Router::connect('/answers/:id', array('controller' => 'answers', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));

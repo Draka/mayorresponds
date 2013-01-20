@@ -11,6 +11,16 @@ class CreateQuestionsHelper extends AppHelper {
             <h1><?php echo __('%s\'s mayor please answer:', $question['City']['name']) ?></h1>
             <table cellpadding="0" cellspacing="0" class="tQuestion">
                 <tr>
+                    <td colspan="3">
+                        <a href="https://twitter.com/share" class="twitter-share-button" data-lang="es" data-size="large">Tweet</a>
+                        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        <?php if ($question['City']['twitter']): ?>
+                            <a href="https://twitter.com/intent/tweet?screen_name=<?php echo $question['City']['twitter'] ?>&text=<?php echo __('%s\'s mayor please answer: %s', $question['City']['name'], SITE . 'questions/' . $question['Question']['id']) ?>" class="twitter-mention-button" data-lang="es" data-size="large">Tweet to @<?php echo $question['City']['twitter'] ?></a>
+                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+                        <?php endif; ?>
+                    </td>
+                </tr>
+                <tr>
                     <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
                     <td width="100%">
 
@@ -28,8 +38,8 @@ class CreateQuestionsHelper extends AppHelper {
                     <td colspan="3">
                         <!-- AddThis Button BEGIN -->
                         <div class="addthis_toolbox addthis_default_style addthis_32x32_style"
-                             addthis:url="http://www.mayorresponds.org/questions/<?php echo $question['Question']['id'] ?>"
-                             addthis:title="<?php echo __('Mayor of %s please answer:', $question['City']['name']) ?>"
+                             addthis:url="<?php echo SITE . 'questions/' . $question['Question']['id'] ?>"
+                             addthis:title="<?php echo __('%s\'s mayor please answer:', $question['City']['name']) ?>"
                              addthis:description="<?php echo str_replace('"', "'", $question['Question']['question']) ?>">
                             <a class="addthis_button_preferred_1"></a>
                             <a class="addthis_button_preferred_2"></a>
@@ -38,7 +48,7 @@ class CreateQuestionsHelper extends AppHelper {
                             <a class="addthis_button_compact"></a>
                             <a class="addthis_counter addthis_bubble_style"></a>
                         </div>
-                        <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+                        <script type="text/javascript">var addthis_config = {"data_track_addressbar":false};</script>
                         <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50fb6bb5384fffe9"></script>
                         <!-- AddThis Button END -->
                     </td>
@@ -174,7 +184,6 @@ class CreateQuestionsHelper extends AppHelper {
                     'maxlength' => 100,
                     'div' => array('class' => 'input required'),
                     'after' => '<div class="never">' . __('your name and email will never be shown.') . '</div>'
-
                 ));
 
 
