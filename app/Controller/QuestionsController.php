@@ -121,10 +121,10 @@ class QuestionsController extends AppController {
                 $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
                 $email->subject('Confirm Vote, please');
-                $email->send('Please confirm your question in the url: ' . SITE . '/confirm/' . $question['Question']['key_confirm']);
+                $email->send('Please confirm your question in the url: ' . SITE . 'confirm/' . $question['Question']['key_confirm']);
 
                 $this->Session->setFlash(__('The question has been saved, check your email to confirm.'));
-                $this->redirect(array('action' => '/'));
+                $this->redirect('/');
             } else {
                 $this->Session->setFlash(__('The question could not be saved. Please, try again.'));
             }
@@ -249,7 +249,7 @@ class QuestionsController extends AppController {
                 $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
                 $email->subject('Confirm Vote, please');
-                $email->send('Please confirm your support in the url: ' . SITE . '/support/' . $support['Support']['key_confirm']);
+                $email->send('Please confirm your support in the url: ' . SITE . 'support/' . $support['Support']['key_confirm']);
 
                 $this->Session->setFlash(__('The support has been received, check your email to confirm.'));
                 $this->redirect('/questions/' . $this->request->data['Support']['question_id']);
