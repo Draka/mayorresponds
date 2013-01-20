@@ -76,8 +76,7 @@ $cakeDescription = __('Mayor Responds');
 
             </div>
         </div>
-<?php echo $this->element('sql_dump'); ?>
-<?php echo $this->Facebook->init(); ?>
-<?php echo $this->fetch('scripts_footer'); ?>
+        <?php echo $this->Facebook->init(); ?>
+        <?php echo $this->fetch('scripts_footer'); ?>
     </body>
 </html>
