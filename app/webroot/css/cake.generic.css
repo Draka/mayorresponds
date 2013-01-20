@@ -121,8 +121,9 @@ div.view{
     margin:0 auto 0 auto;
 }
 div.marco{
+    background-color: rgba(255,255,255,0.6);
     margin-bottom: 30px;
-    border: 1px #000 solid;
+    border: 1px rgb(148, 148, 148) solid;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -343,7 +344,7 @@ fieldset fieldset div {
 }
 form div {
     clear: both;
-    margin-bottom: 1em;
+    margin-bottom: 0em; /* before value 1*/
     padding: .5em;
     vertical-align: text-top;
 }
@@ -995,14 +996,32 @@ box-shadow:0px 0px 10px 2px #777777;
     padding: 6px;
 }
 
-.instructions h2{
+.instructions h2 {
     background: none;
 }
-
+.instructions p {
+    font-size: 11px;
+    color: rgb(133, 129, 129);
+    line-height: 
+}
 .right-col{
     float: left;
     padding: 10px 10px;
     width: 60%;
     margin-left: 20px;
     min-width: 320px;
+}
+
+
+
+@media (max-width: 768px) {
+    div.question-wrapper{
+        width: 100%;
+    }
+    .right-col {
+        width: 100%;
+        padding: 10px 2px;
+        margin-left: 0px;
+
+    }
 }
