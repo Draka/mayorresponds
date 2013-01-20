@@ -1,6 +1,7 @@
 <?php
 define('DEBUG', 2);
 define('SITE', 'http://www.mayorresponds.org/');
+define('DOMAIN', 'mayorresponds.org');
 /**
  * This is core configuration file.
  *

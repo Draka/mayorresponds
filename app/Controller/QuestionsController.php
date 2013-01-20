@@ -111,13 +111,14 @@ class QuestionsController extends AppController {
             $this->request->data['Question']['user_id'] = $user['User']['id'];
             $this->request->data['Question']['city_id'] = $city['City']['id'];
 
+            //pr ($this->request->data);die;
             $this->Question->create();
             $question = $this->Question->save($this->request->data);
             if ($question) {
 
                 $email = new CakeEmail();
-                $email->from(array('alert@example.com' => 'Mayor Responds'));
-                $email->replyTo('no-reply@example.com', 'Mayor Responds - No reply');
+                $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
+                $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
                 $email->subject('Confirm Vote, please');
                 $email->send('Please confirm your question in the url: ' . SITE . '/confirm/' . $question['Question']['key_confirm']);
@@ -166,12 +167,11 @@ class QuestionsController extends AppController {
                 $support['Support']['key_confirm'] = null;
                 $this->Support->save($support);
                 $this->Question->updateAll(
-                    array('Question.vote_plus' => 'Question.vote_plus + 1', 'Question.modified' => 'NOW()'),
-                    array('Question.id' => $support['Support']['question_id'])
+                        array('Question.vote_plus' => 'Question.vote_plus + 1', 'Question.modified' => 'NOW()'), array('Question.id' => $support['Support']['question_id'])
                 );
                 $this->Session->setFlash(__('The support has been confimed'));
                 $this->redirect('/questions/' . $support['Support']['question_id']);
-            }else{
+            } else {
                 $this->Session->setFlash(__('The support does not exist or has been confirmed'));
                 $this->redirect('/');
             }
@@ -192,8 +192,8 @@ class QuestionsController extends AppController {
                 $question['Question']['key_confirm'] = null;
                 $this->Support->save($question);
                 $this->Session->setFlash(__('The question has been confimed'));
-                $this->redirect('/questions/' . $question['Question']['question_id']);
-            }else{
+                $this->redirect('/questions/' . $question['Question']['id']);
+            } else {
                 $this->Session->setFlash(__('The question does not exist or has been confirmed'));
                 $this->redirect('/');
             }
@@ -245,8 +245,8 @@ class QuestionsController extends AppController {
             if ($this->Support->save($this->request->data)) {
 
                 $email = new CakeEmail();
-                $email->from(array('alert@example.com' => 'Mayor Responds'));
-                $email->replyTo('no-reply@example.com', 'Mayor Responds - No reply');
+                $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
+                $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
                 $email->subject('Confirm Vote, please');
                 $email->send('Please confirm your support in the url: ' . SITE . '/support/' . $support['Support']['key_confirm']);
