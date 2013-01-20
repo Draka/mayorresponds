@@ -54,7 +54,7 @@ $cakeDescription = __('Mayor Responds');
     <body>
         <div id="container">
             <div id="header">
-                <div class="logo">Mayor<span>Responds</span>.</div>
+                <div class="logo">Mayor<span>Responds</span>.org</div>
                 <div class="menu">
                     <table>
                         <tr>
