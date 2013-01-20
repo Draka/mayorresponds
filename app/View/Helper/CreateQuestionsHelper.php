@@ -147,6 +147,11 @@ class CreateQuestionsHelper extends AppHelper {
                     'value' => '0'
                 ));
 
+                echo $this->Form->input('facebook_email', array(
+                    'type' => 'hidden',
+                    'value' => ''
+                ));
+
                 echo $this->Form->input('question', array(
                     'type' => 'textarea',
                     'label' => __('Question:'),
