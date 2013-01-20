@@ -21,7 +21,8 @@
         'label' => __('Your email:'),
         'class' => 'required',
         'maxlength' => 100,
-        'div' => array('class' => 'input required')
+        'div' => array('class' => 'input required'),
+        'after' => '<div class="never">' . __('your name and email will never be shown.') . '</div>'
     ));
 
     echo $this->Form->input(__('Vote YES'), array(

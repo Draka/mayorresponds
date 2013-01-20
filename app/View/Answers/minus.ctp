@@ -5,36 +5,37 @@
     echo $this->Form->create('Vote', array('url' => '/minus/' . $answer['id']));
 
     echo $this->Form->input('name', array(
-    'type' => 'text',
-    'label' => __('Your name:'),
-    'class' => 'required',
-    'maxlength' => 100,
-    'div' => array('class' => 'input required')
+        'type' => 'text',
+        'label' => __('Your name:'),
+        'class' => 'required',
+        'maxlength' => 100,
+        'div' => array('class' => 'input required')
     ));
 
     echo $this->Form->input('confirm', array(
-    'type' => 'hidden',
-    'value' => '0'
+        'type' => 'hidden',
+        'value' => '0'
     ));
 
     echo $this->Form->input('email', array(
-    'type' => 'text',
-    'label' => __('Your email:'),
-    'class' => 'required',
-    'maxlength' => 100,
-    'div' => array('class' => 'input required')
+        'type' => 'text',
+        'label' => __('Your email:'),
+        'class' => 'required',
+        'maxlength' => 100,
+        'div' => array('class' => 'input required'),
+        'after' => '<div class="never">' . __('your name and email will never be shown.') . '</div>'
     ));
 
     echo $this->Form->input(__('Vote NO'), array(
-    'type' => 'submit',
-    'label' => false,
+        'type' => 'submit',
+        'label' => false,
     ));
 
     echo $this->Form->end();
     echo $this->Facebook->login(array('perms' => 'email,publish_stream', 'width' => '400'));
     ?>
 </div>
-<?php $this->start( 'scripts_footer' ); ?>
+<?php $this->start('scripts_footer'); ?>
 
 <script>
     FB.Event.subscribe('auth.statusChange', function(response) {
