@@ -36,8 +36,7 @@ class QuestionsController extends AppController {
                 'Question.id' => $id,
                 'Question.active' => true,
                 'Question.confirm' => true,
-            ),
-                ));
+            )));
         if (!$question) {
             $this->Session->setFlash(__('The question does not exist or has been disabled'));
             $this->redirect('/');

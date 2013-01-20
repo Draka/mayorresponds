@@ -7,7 +7,10 @@ App::uses('AppController', 'Controller');
  */
 class CitiesController extends AppController {
 
-/**
+    public $helpers = array ('CreateQuestions');
+    public $uses = array ('Question', 'City');
+
+    /**
  * index method
  *
  * @return void
@@ -20,7 +23,7 @@ class CitiesController extends AppController {
             WHERE Question.city_id = City.id
             ) as num
             FROM cities as City ORDER BY num DESC LIMIT 20;");
-		$this->set('cities', $this->paginate());
+		$this->set('cities', $result);
 	}
 
 /**
@@ -31,11 +34,18 @@ class CitiesController extends AppController {
  * @return void
  */
 	public function view($id = null) {
-		$this->City->id = $id;
-		if (!$this->City->exists()) {
-			throw new NotFoundException(__('Invalid city'));
-		}
-		$this->set('city', $this->City->read(null, $id));
+        $city = $this->City->find('first', array(
+            'conditions' => array(
+                'City.name' => $id,
+            )));
+        if (!$city) {
+            throw new NotFoundException(__('Invalid city'));
+        }
+
+        $title_for_layout = __('%s\'s questions', $id);
+
+        $questions=$this->Question->findCity($city['City']['id']);
+		$this->set(compact('title_for_layout', 'city', 'questions'));
 	}
 
 }

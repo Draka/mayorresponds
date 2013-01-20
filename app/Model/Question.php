@@ -124,5 +124,17 @@ class Question extends AppModel {
             'order' => 'Question.id DESC'
         ));
     }
+    public function findCity($city_id, $limit = 20){
+        return $this->find('all',array(
+            'recursive' => 1,
+            'conditions' => array(
+                'Question.confirm' => true,
+                'Question.active' => true,
+                'Question.city_id' => $city_id,
+            ),
+            'limit' => $limit,
+            'order' => 'Question.id DESC'
+        ));
+    }
 
 }
