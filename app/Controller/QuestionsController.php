@@ -207,6 +207,8 @@ class QuestionsController extends AppController {
     }
 
     public function support($id = null) {
+        $this->set('title_for_layout', __('Want to support?'));
+
         $question = $this->Question->find('first', array(
             'conditions' => array(
                 'Question.id' => $id,
