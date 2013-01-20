@@ -76,6 +76,11 @@ if ($question) {
         <?php
         echo $this->Form->create('Support', array('url' => '/questions/support/' . $question['Question']['id']));
 
+        echo $this->Form->input('confirm', array(
+            'type' => 'hidden',
+            'value' => '0'
+        ));
+
         echo $this->Form->input('name', array(
             'type' => 'text',
             'label' => __('Your name:'),
@@ -98,7 +103,21 @@ if ($question) {
         ));
 
         echo $this->Form->end();
+
+        echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
         ?>
+        <?php $this->start( 'scripts_footer' ) ?>
+            <script>
+                FB.Event.subscribe('auth.statusChange', function(response) {
+                    FB.api('/me', function(response) {
+                        $( '#SupportName' ).val( response.name );
+                        $( '#SupportEmail' ).val( response.email );
+                        $( '#SupportConfirm' ).val( 1 );
+                    });
+                },true);
+            </script>
+        <?php $this->end( ) ?>
+
     </div>
     <?php
 } else {

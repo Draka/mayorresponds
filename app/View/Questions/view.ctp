@@ -83,6 +83,11 @@ if ($question) {
             'value' => $question['Question']['id']
         ));
 
+        echo $this->Form->input('confirm', array(
+            'type' => 'hidden',
+            'value' => '0'
+        ));
+
         echo $this->Form->input('comment', array(
             'type' => 'text',
             'label' => __('Comment:'),
@@ -119,8 +124,21 @@ if ($question) {
         ));
 
         echo $this->Form->end();
+
+        echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
         ?>
     </div>
+    <?php $this->start( 'scripts_footer' ) ?>
+        <script>
+            FB.Event.subscribe('auth.statusChange', function(response) {
+                FB.api('/me', function(response) {
+                    $( '#AnswerName' ).val( response.name );
+                    $( '#AnswerEmail' ).val( response.email );
+                    $( '#AnswerConfirm' ).val( 1 );
+                });
+            },true);
+        </script>
+    <?php $this->end( ) ?>
     <?php
 } else {
     $this->CreateQuestions->form();
