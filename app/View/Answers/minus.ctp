@@ -1,30 +1,4 @@
-<?php
-$this->CreateQuestions->details($question);
-?>
 
-<div class="marco form cleanTop50">
-    <h1><?php echo __('Answer') ?></h1>
-    <table cellpadding="0" cellspacing="0" class="tAnswer">
-        <tr>
-            <td><div class="vote"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Yes'), '/plus/' . $answer['id']) ?></div></div></td>
-            <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_minus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/minus/' . $answer['id']) ?></div></div></td>
-            <td width="100%">
-                <div class="answer">
-                    <?php echo $answer['comment']; ?>
-                </div>
-                <div class="url">
-                    <?php echo $this->Html->link($answer['url'], $answer['url'], array('target' => '_blank')); ?>
-                </div>
-                <div class="meta">
-                    [<?php echo $answer['created']; ?>]
-
-                </div>
-            </td>
-            <td><div class="report"><?php echo $this->Html->link(__('Report'), '/answers/report/' . $answer['id']) ?></div></td>
-        </tr>
-
-    </table>
-</div>
 <div class="questions form marco cleanTop50">
     <h1><?php echo __('I disagree, this is not the correct answer') ?></h1>
     <?php
@@ -74,3 +48,31 @@ $this->CreateQuestions->details($question);
 
 <?php
 $this->end();
+?>
+<div class="cleanButtom50"></div>
+<?php
+$this->CreateQuestions->details($question);
+?>
+<div class="marco form cleanTop50">
+    <h1><?php echo __('Answer') ?></h1>
+    <table cellpadding="0" cellspacing="0" class="tAnswer">
+        <tr>
+            <td><div class="vote"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Yes'), '/plus/' . $answer['id']) ?></div></div></td>
+            <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_minus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/minus/' . $answer['id']) ?></div></div></td>
+            <td width="100%">
+                <div class="answer">
+                    <?php echo $answer['comment']; ?>
+                </div>
+                <div class="url">
+                    <?php echo $this->Html->link($answer['url'], $answer['url'], array('target' => '_blank')); ?>
+                </div>
+                <div class="meta">
+                    [<?php echo $answer['created']; ?>]
+
+                </div>
+            </td>
+            <td><div class="report"><?php echo $this->Html->link(__('Report'), '/answers/report/' . $answer['id']) ?></div></td>
+        </tr>
+
+    </table>
+</div>
