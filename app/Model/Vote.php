@@ -69,7 +69,7 @@ class Vote extends AppModel {
     );
 
     public function beforeSave($options = array()) {
-        if (empty($this->data['Vote']['id'])) {
+        if (empty($this->data['Vote']['id']) && empty($this->data['Vote']['confirm'])) {
             $this->data['Vote']['key_confirm'] = substr(md5(time()), 0, 16);
         }
 

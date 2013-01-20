@@ -73,6 +73,9 @@ class QuestionsController extends AppController {
                     $this->redirect(array('action' => 'add'));
                 }
             }
+            if ($this->request->data['Question']['facebook_email'] != $user['User']['email']){
+                $this->request->data['Question']['confirm'] = false;
+            }
 //find city
             $d_city = json_decode($this->request->data['Question']['city'], true);
 //pr($d_city)

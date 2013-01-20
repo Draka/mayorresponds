@@ -134,7 +134,7 @@ class User extends AppModel {
     );
 
     public function beforeSave($options = array()) {
-        if (empty($this->data['User']['id'])) {
+        if (empty($this->data['User']['id']) && empty($this->data['Vote']['confirm'])) {
             $this->data['User']['key_confirm'] = substr(md5(time()), 0, 16);
         }
 
