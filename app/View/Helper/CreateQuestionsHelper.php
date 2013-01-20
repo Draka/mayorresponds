@@ -13,7 +13,7 @@ class CreateQuestionsHelper extends AppHelper {
                 <?php foreach ($questions as $question): ?>
                     <table cellpadding="0" cellspacing="0" class="tQuestion">
                         <tr>
-                            <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
+                            <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
                             <td width="100%">
 
                                 <?php
@@ -26,10 +26,9 @@ class CreateQuestionsHelper extends AppHelper {
                                 }
                                 ?>
                                 <div class="question">
-                                    <?php echo $this->Html->link($question['Question']['question'], '/questions/' . $question['Question']['id']); ?>
+                                    <?php echo $this->Html->link(sprintf( '%s\'s mayor: %s',  $question['City']['name'], $question['Question']['question']), '/questions/' . $question['Question']['id']); ?>
                                 </div>
                                 <div class="meta">
-                                    <?php echo $question['City']['name']; ?> -
                                     <?php echo $question['City']['country_code']; ?>
                                     [<?php echo $question['Question']['created']; ?>]
 
