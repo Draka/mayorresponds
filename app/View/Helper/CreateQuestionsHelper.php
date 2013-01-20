@@ -8,7 +8,7 @@ class CreateQuestionsHelper extends AppHelper {
     public function details($question, $ext = false) {
         ?>
         <div class="marco form cleanTop50">
-            <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
+            <h1><?php echo __('%s\'s mayor please answer:', $question['City']['name']) ?></h1>
             <table cellpadding="0" cellspacing="0" class="tQuestion">
                 <tr>
                     <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
@@ -18,9 +18,7 @@ class CreateQuestionsHelper extends AppHelper {
                             <?php echo $this->Html->link($question['Question']['question'], '/questions/' . $question['Question']['id']); ?>
                         </div>
                         <div class="meta">
-                            <?php echo $this->Html->link($question['City']['name'], '/cities/' . $question['City']['name']); ?> -
-                            <?php echo $question['City']['country_code']; ?>
-                            [<?php echo $question['Question']['created']; ?>]
+                            <small>by <?php echo $question['User']['name']; ?>, from <?php echo $this->Html->link($question['City']['name'], '/cities/' . $question['City']['name']); ?>. Created:  <?php echo $question['Question']['created']; ?>.</small>
 
                         </div>
                     </td>
