@@ -45,7 +45,7 @@ class PagesController extends AppController {
  *
  * @var array
  */
-	public $uses = array();
+	public $uses = array('Question');
 
 /**
  * Displays a view
@@ -71,7 +71,9 @@ class PagesController extends AppController {
 		if (!empty($path[$count - 1])) {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
-		$this->set(compact('page', 'subpage', 'title_for_layout'));
+        $questions=$this->Question->findLast();
+        pr($questions);
+		$this->set(compact('page', 'subpage', 'title_for_layout', 'questions'));
 		$this->render(implode('/', $path));
 	}
 }

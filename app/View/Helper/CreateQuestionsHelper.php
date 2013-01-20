@@ -5,13 +5,46 @@ class CreateQuestionsHelper extends AppHelper {
 
     public $helpers = array('Html', 'Form');
 
+    public function listAll($questions) {
+        if (count($questions)) {
+            ?>
+            <div class="marco form cleanTop50">
+                <h1><?php echo __('Lasted questions') ?></h1>
+                <?php foreach ($questions as $question): ?>
+                    <table cellpadding="0" cellspacing="0" class="tQuestion">
+                        <tr>
+                            <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Vote'), '/questions/vote/' . $question['Question']['id']) ?></div></div></td>
+                            <td width="100%">
+                                <div class="question">
+                                    <?php echo $question['Question']['question']; ?>
+                                </div>
+                                <div class="meta">
+                                    <?php echo $question['City']['name']; ?> -
+                                    <?php echo $question['City']['country_code']; ?>
+                                    [<?php echo $question['Question']['created']; ?>]
+
+                                </div>
+                            </td>
+                            <td><div class="report"><?php echo $this->Html->link(__('Report'), '/questions/report/' . $question['Question']['id']) ?></div></td>
+                        </tr>
+                        <?php
+                        ?>
+
+                    </table>
+                <?php endforeach; ?>
+            </div>
+
+            <?php
+        }
+    }
+
     public function form() {
         ?>
-        <div class="questions form">
-            <h1><?php echo __('Make your Question')?></h1>
+        <div class="questions form marco">
+            <h1><?php echo __('Make your Question') ?></h1>
             <?php
             echo $this->Form->create('Question', array('url' => '/questions/add'));
-            
+
             echo $this->Form->input('search_city', array(
                 'type' => 'text',
                 'label' => __('City:'),
