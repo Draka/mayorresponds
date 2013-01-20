@@ -70,6 +70,9 @@ $cakeDescription = __('Mayor Responds');
             <div id="content">
 
                 <?php echo $this->Session->flash(); ?>
+                <div class="title">
+                <?php echo $title_for_layout; ?>
+                </div>
                 <?php echo $this->fetch('content'); ?>
             </div>
             <div id="footer">
