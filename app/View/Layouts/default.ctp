@@ -25,6 +25,15 @@ $cakeDescription = __('Mayor Responds');
             <?php echo $cakeDescription ?>:
             <?php echo $title_for_layout; ?>
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta property="og:title" content="Mayor Responds" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="http://www.mayorresponds.org/" />
+        <meta property="og:image" content="http://www.mayorresponds.org/img/logo.png" />
+        <meta property="og:site_name" content="Mayor Responds" />
+        <meta property="og:description" content="Using popular pressure we can make our governors answer our questions."/>
+        <meta property="fb:admins" content="691342256" />
+
         <?php
         echo $this->Html->meta('icon');
 

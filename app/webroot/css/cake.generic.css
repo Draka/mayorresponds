@@ -844,6 +844,47 @@ pre {
         );
 }
 
+.vote_no{
+    background-image: linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -o-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -moz-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -webkit-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -ms-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+
+    background-image: -webkit-gradient(
+        linear,
+        right bottom,
+        right top,
+        color-stop(0.13, rgb(190,59,71)),
+        color-stop(0.57, rgb(228,89,100)),
+        color-stop(0.79, rgb(255,116,130))
+        );
+
+    height: 60px;
+    width: 60px;
+    -moz-border-radius: 4px;
+    -wekbkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 5px;
+    border: 1px #000 solid;
+}
+.vote_no:hover{
+    background-image: linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -o-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -moz-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -webkit-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+    background-image: -ms-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
+
+    background-image: -webkit-gradient(
+        linear,
+        right top,
+        right bottom,
+        color-stop(0.13, rgb(190,59,71)),
+        color-stop(0.57, rgb(228,89,100)),
+        color-stop(0.79, rgb(255,116,130))
+        );
+}
+
 .report{
     background-image: linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
     background-image: -o-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
@@ -903,7 +944,36 @@ pre {
 .tQuestion .question{
     font-size: 150%;
 }
+.tQuestion .question a{
+    color: #333;
+    text-decoration: none;
+}
+.tQuestion .question a:hover{
+    color: #333;
+    text-decoration: underline;
+}
 .tQuestion .meta{
+    font-size: 80%;
+    color: #777;
+}
+
+.tQuestion .answer{
+    color: #F00000;
+    font-size: 80%;
+}
+
+.tAnswer .answer{
+    font-size: 130%;
+}
+.tAnswer .url a{
+    color: #367889;
+    text-decoration: underline;
+}
+.tAnswer .url a:hover{
+    color: #333;
+    text-decoration: underline;
+}
+.tAnswer .meta{
     font-size: 80%;
     color: #777;
 }

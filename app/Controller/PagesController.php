@@ -72,7 +72,6 @@ class PagesController extends AppController {
 			$title_for_layout = Inflector::humanize($path[$count - 1]);
 		}
         $questions=$this->Question->findLast();
-        pr($questions);
 		$this->set(compact('page', 'subpage', 'title_for_layout', 'questions'));
 		$this->render(implode('/', $path));
 	}

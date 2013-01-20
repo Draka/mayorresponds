@@ -31,10 +31,16 @@ class QuestionsController extends AppController {
     public function view($id = null) {
         $this->Question->id = $id;
         if (!$this->Question->exists()) {
-            throw new NotFoundException(__('Invalid question'));
+            $this->Session->setFlash(__('The question does not exist or has been disabled'));
+            $this->redirect('/');
         }
-        pr($this->Question->read(null, $id));die;
-        $this->set('question', $this->Question->read(null, $id));
+        $this->set('question', $this->Question->find('first', array(
+            'conditions' => array(
+                'Question.id' => $id,
+                'Question.active' => true,
+                'Question.confirm' => true,
+            ),
+        )));
     }
 
     /**

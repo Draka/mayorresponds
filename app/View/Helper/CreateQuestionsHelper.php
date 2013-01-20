@@ -15,8 +15,18 @@ class CreateQuestionsHelper extends AppHelper {
                         <tr>
                             <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Vote'), '/questions/vote/' . $question['Question']['id']) ?></div></div></td>
                             <td width="100%">
+
+                                <?php
+                                if (count($question['Answer'])) {
+                                    ?>
+                                    <div class="answer">
+                                        <i><?php echo __('This question has one or more answers, click inside to read more.') ?></i>
+                                    </div>
+                                    <?php
+                                }
+                                ?>
                                 <div class="question">
-                                    <?php echo $question['Question']['question']; ?>
+                                    <?php echo $this->Html->link($question['Question']['question'], '/questions/' . $question['Question']['id']); ?>
                                 </div>
                                 <div class="meta">
                                     <?php echo $question['City']['name']; ?> -
@@ -27,8 +37,6 @@ class CreateQuestionsHelper extends AppHelper {
                             </td>
                             <td><div class="report"><?php echo $this->Html->link(__('Report'), '/questions/report/' . $question['Question']['id']) ?></div></td>
                         </tr>
-                        <?php
-                        ?>
 
                     </table>
                 <?php endforeach; ?>
