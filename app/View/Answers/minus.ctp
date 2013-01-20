@@ -91,7 +91,7 @@
     'div' => array('class' => 'input required')
     ));
 
-    echo $this->Form->input(__('Post anwser'), array(
+    echo $this->Form->input(__('Vote NO'), array(
     'type' => 'submit',
     'label' => false,
     ));

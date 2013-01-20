@@ -6,7 +6,7 @@ if ($question) {
         <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
         <table cellpadding="0" cellspacing="0" class="tQuestion">
             <tr>
-                <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
+                <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
                 <td width="100%">
 
                     <div class="question">
