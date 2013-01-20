@@ -120,7 +120,7 @@ class QuestionsController extends AppController {
                 $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
                 $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
-                $email->subject('Confirm Vote, please');
+                $email->subject('Confirm question, please');
                 $email->send('Please confirm your question in the url: ' . SITE . 'confirm/' . $question['Question']['key_confirm']);
 
                 $this->Session->setFlash(__('The question has been saved, check your email to confirm.'));
@@ -159,7 +159,7 @@ class QuestionsController extends AppController {
             $support = $this->Support->find('first', array(
                 'conditions' => array(
                     'Support.key_confirm' => $key,
-                )));
+                    )));
             if ($support) {
                 unset($support['Support']['modified']);
                 $support['Support']['confirm'] = true;
@@ -184,7 +184,7 @@ class QuestionsController extends AppController {
             $question = $this->Question->find('first', array(
                 'conditions' => array(
                     'Question.key_confirm' => $key,
-                )));
+                    )));
 
             if ($question) {
                 unset($question['Question']['modified']);
@@ -236,9 +236,18 @@ class QuestionsController extends AppController {
                     $this->redirect(array('action' => 'add'));
                 }
             }
+            $support = $this->Support->find('first', array(
+                'conditions' => array(
+                    'Support.question_id' => $id,
+                    'Support.user_id' => $user['User']['id'],
+                    )));
+            if ($support) {
+                $this->Session->setFlash(__('You already supported this question.'));
+                $this->redirect('/');
+            }
 
             $this->request->data['Support']['user_id'] = $user['User']['id'];
-            $this->request->data['Support']['question_id'] = $user['User']['id'];
+            $this->request->data['Support']['question_id'] = $id;
 
             $this->Support->create();
             $support = $this->Support->save($this->request->data);
@@ -248,7 +257,7 @@ class QuestionsController extends AppController {
                 $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
                 $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
                 $email->to($user['User']['email'], $user['User']['name']);
-                $email->subject('Confirm Vote, please');
+                $email->subject('Confirm Support, please');
                 $email->send('Please confirm your support in the url: ' . SITE . 'support/' . $support['Support']['key_confirm']);
 
                 $this->Session->setFlash(__('The support has been received, check your email to confirm.'));
