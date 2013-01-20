@@ -123,8 +123,8 @@ class QuestionsController extends AppController {
                 $email->subject('Confirm Vote, please');
                 $email->send('Please confirm your question in the url: ' . SITE . '/confirm/' . $question['Question']['key_confirm']);
 
-                $this->Session->setFlash(__('The question has been saved'));
-                $this->redirect(array('action' => 'view/' . $this->Question->id));
+                $this->Session->setFlash(__('The question has been saved, check your email to confirm.'));
+                $this->redirect(array('action' => '/'));
             } else {
                 $this->Session->setFlash(__('The question could not be saved. Please, try again.'));
             }
@@ -159,8 +159,7 @@ class QuestionsController extends AppController {
             $support = $this->Support->find('first', array(
                 'conditions' => array(
                     'Support.key_confirm' => $key,
-                ),
-                    ));
+                )));
             if ($support) {
                 unset($support['Support']['modified']);
                 $support['Support']['confirm'] = true;
@@ -180,17 +179,18 @@ class QuestionsController extends AppController {
     }
 
     public function confirm($key = null) {
+
         if ($key) {
             $question = $this->Question->find('first', array(
                 'conditions' => array(
                     'Question.key_confirm' => $key,
-                ),
-                    ));
+                )));
+
             if ($question) {
                 unset($question['Question']['modified']);
                 $question['Question']['confirm'] = true;
                 $question['Question']['key_confirm'] = null;
-                $this->Support->save($question);
+                $this->Question->save($question);
                 $this->Session->setFlash(__('The question has been confimed'));
                 $this->redirect('/questions/' . $question['Question']['id']);
             } else {
@@ -251,7 +251,7 @@ class QuestionsController extends AppController {
                 $email->subject('Confirm Vote, please');
                 $email->send('Please confirm your support in the url: ' . SITE . '/support/' . $support['Support']['key_confirm']);
 
-                $this->Session->setFlash(__('The support has been received'));
+                $this->Session->setFlash(__('The support has been received, check your email to confirm.'));
                 $this->redirect('/questions/' . $this->request->data['Support']['question_id']);
             } else {
                 $this->Session->setFlash(__('The support could not be saved. Please, try again.'));
