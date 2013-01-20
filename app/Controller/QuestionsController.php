@@ -112,7 +112,16 @@ class QuestionsController extends AppController {
             $this->request->data['Question']['city_id'] = $city['City']['id'];
 
             $this->Question->create();
-            if ($this->Question->save($this->request->data)) {
+            $question = $this->Question->save($this->request->data);
+            if ($question) {
+
+                $email = new CakeEmail();
+                $email->from(array('alert@example.com' => 'Mayor Responds'));
+                $email->replyTo('no-reply@example.com', 'Mayor Responds - No reply');
+                $email->to($user['User']['email'], $user['User']['name']);
+                $email->subject('Confirm Vote, please');
+                $email->send('Please confirm your question in the url: ' . SITE . '/confirm/' . $question['Question']['key_confirm']);
+
                 $this->Session->setFlash(__('The question has been saved'));
                 $this->redirect(array('action' => 'view/' . $this->Question->id));
             } else {
@@ -164,6 +173,28 @@ class QuestionsController extends AppController {
                 $this->redirect('/questions/' . $support['Support']['question_id']);
             }else{
                 $this->Session->setFlash(__('The support does not exist or has been confirmed'));
+                $this->redirect('/');
+            }
+        }
+        throw new NotFoundException();
+    }
+
+    public function confirm($key = null) {
+        if ($key) {
+            $question = $this->Question->find('first', array(
+                'conditions' => array(
+                    'Question.key_confirm' => $key,
+                ),
+                    ));
+            if ($question) {
+                unset($question['Question']['modified']);
+                $question['Question']['confirm'] = true;
+                $question['Question']['key_confirm'] = null;
+                $this->Support->save($question);
+                $this->Session->setFlash(__('The question has been confimed'));
+                $this->redirect('/questions/' . $question['Question']['question_id']);
+            }else{
+                $this->Session->setFlash(__('The question does not exist or has been confirmed'));
                 $this->redirect('/');
             }
         }

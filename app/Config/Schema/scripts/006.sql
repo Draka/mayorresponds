@@ -45,5 +45,5 @@ ALTER TABLE  `votes` ADD INDEX (  `answer_id` );
 ALTER TABLE  `supports` ADD INDEX (  `user_id` );
 ALTER TABLE  `supports` ADD INDEX (  `question_id` );
 
-ALTER TABLE  `votes` CHANGE  `key_confirm`  `key_confirm` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL
+ALTER TABLE  `votes` CHANGE  `key_confirm`  `key_confirm` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
 ALTER TABLE  `supports` CHANGE  `key_confirm`  `key_confirm` VARCHAR( 16 ) CHARACTER SET utf8 COLLATE utf8_general_ci NULL;
