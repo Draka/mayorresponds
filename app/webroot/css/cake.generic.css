@@ -130,6 +130,7 @@ div.marco{
 
 }
 div.questions{
+    position: fixed;
     max-width: 450px;
     padding:10px 20px;
     margin:0 auto 0 auto;
@@ -979,4 +980,9 @@ box-shadow:0px 0px 10px 2px #777777;
 .tAnswer .meta{
     font-size: 80%;
     color: #777;
+}
+
+/*  Nuevo */
+.instructions {
+    margin-left: 510px;
 }
