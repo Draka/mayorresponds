@@ -52,7 +52,7 @@ class QuestionsController extends AppController {
      */
     public function add() {
         if ($this->request->is('post')) {
-            //find user
+//find user
             $user = $this->Question->User->find('first', array(
                 'recursive' => -1,
                 'conditions' => array(
@@ -72,9 +72,9 @@ class QuestionsController extends AppController {
                     $this->redirect(array('action' => 'add'));
                 }
             }
-            //find city
+//find city
             $d_city = json_decode($this->request->data['Question']['city'], true);
-            //pr($d_city)
+//pr($d_city)
             if (!is_array($d_city) || empty($d_city['geonameId'])) {
                 $this->Session->setFlash(__('Invalid city'));
                 $this->redirect(array('action' => 'add'));
@@ -111,20 +111,25 @@ class QuestionsController extends AppController {
             $this->request->data['Question']['user_id'] = $user['User']['id'];
             $this->request->data['Question']['city_id'] = $city['City']['id'];
 
-            //pr ($this->request->data);die;
+//pr ($this->request->data);die;
             $this->Question->create();
             $question = $this->Question->save($this->request->data);
             if ($question) {
 
-                $email = new CakeEmail();
-                $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
-                $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
-                $email->to($user['User']['email'], $user['User']['name']);
-                $email->subject('Confirm question, please');
-                $email->send('Please confirm your question in the url: ' . SITE . 'confirm/' . $question['Question']['key_confirm']);
+                if (empty($question['Question']['confirm'])) {
+                    $email = new CakeEmail();
+                    $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
+                    $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
+                    $email->to($user['User']['email'], $user['User']['name']);
+                    $email->subject('Confirm question, please');
+                    $email->send('Please confirm your question in the url: ' . SITE . 'confirm/' . $question['Question']['key_confirm']);
 
-                $this->Session->setFlash(__('The question has been saved, check your email to confirm.'));
-                $this->redirect('/');
+                    $this->Session->setFlash(__('The question has been saved, check your email to confirm.'));
+                    $this->redirect('/');
+                } else {
+                    $this->Session->setFlash(__('The question has been saved.'));
+                    $this->redirect('/questions/' . $question['Question']['id']);
+                }
             } else {
                 $this->Session->setFlash(__('The question could not be saved. Please, try again.'));
             }
@@ -185,7 +190,6 @@ class QuestionsController extends AppController {
                 'conditions' => array(
                     'Question.key_confirm' => $key,
                     )));
-
             if ($question) {
                 unset($question['Question']['modified']);
                 $question['Question']['confirm'] = true;
@@ -216,7 +220,7 @@ class QuestionsController extends AppController {
         $this->set('question', $question);
 
         if ($this->request->is('post')) {
-            //find user
+//find user
             $user = $this->Question->User->find('first', array(
                 'recursive' => -1,
                 'conditions' => array(

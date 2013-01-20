@@ -67,6 +67,11 @@ class CreateQuestionsHelper extends AppHelper {
                 'value' => ''
             ));
 
+            echo $this->Form->input('confirm', array(
+                'type' => 'hidden',
+                'value' => '0'
+            ));
+
             echo $this->Form->input('question', array(
                 'type' => 'textarea',
                 'label' => __('Question:'),

@@ -803,7 +803,20 @@ pre {
     margin-top: 50px !important;
 }
 
-.vote{
+.vote, .vote_no{
+    height: 60px;
+    width: 80px;
+    -moz-border-radius: 4px;
+    -wekbkit-border-radius: 4px;
+    border-radius: 4px;
+    padding: 3px;
+    border: 1px #000 solid;
+    -moz-box-shadow:0px 0px 10px 2px #777777;
+-webkit-box-shadow:0px 0px 10px 2px #777777;
+box-shadow:0px 0px 10px 2px #777777;
+}
+
+.vote .text a{
     background-image: linear-gradient(bottom, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
     background-image: -o-linear-gradient(bottom, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
     background-image: -moz-linear-gradient(bottom, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
@@ -818,16 +831,13 @@ pre {
         color-stop(0.55, rgb(42,145,168)),
         color-stop(0.78, rgb(72,174,202))
         );
-
-    height: 60px;
-    width: 60px;
     -moz-border-radius: 4px;
     -wekbkit-border-radius: 4px;
     border-radius: 4px;
     padding: 5px;
-    border: 1px #000 solid;
+    margin: 0;
 }
-.vote:hover{
+.vote .text a:hover{
     background-image: linear-gradient(top, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
     background-image: -o-linear-gradient(top, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
     background-image: -moz-linear-gradient(top, rgb(16,111,140) 9%, rgb(42,145,168) 55%, rgb(72,174,202) 78%);
@@ -844,7 +854,7 @@ pre {
         );
 }
 
-.vote_no{
+.vote_no .text a{
     background-image: linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
     background-image: -o-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
     background-image: -moz-linear-gradient(bottom, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
@@ -859,16 +869,8 @@ pre {
         color-stop(0.57, rgb(228,89,100)),
         color-stop(0.79, rgb(255,116,130))
         );
-
-    height: 60px;
-    width: 60px;
-    -moz-border-radius: 4px;
-    -wekbkit-border-radius: 4px;
-    border-radius: 4px;
-    padding: 5px;
-    border: 1px #000 solid;
 }
-.vote_no:hover{
+.vote_no .text a:hover{
     background-image: linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
     background-image: -o-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
     background-image: -moz-linear-gradient(top, rgb(190,59,71) 13%, rgb(228,89,100) 57%, rgb(255,116,130) 79%);
@@ -932,6 +934,7 @@ pre {
 .vote .num{
     font-size: 180%;
     text-align: center;
+    margin-bottom: 3px;
 }
 .vote .text{
     text-align: center;

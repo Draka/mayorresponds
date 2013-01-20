@@ -47,8 +47,8 @@ if ($question) {
             <?php foreach ($question['Answer'] as $answer): ?>
                 <table cellpadding="0" cellspacing="0" class="tAnswer">
                     <tr>
-                        <td><div class="vote"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Yes'), '/plus/' . $answer['id']) ?></div></div></td>
-                        <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/minus/' . $answer['id']) ?></div></div></td>
+                        <td><div class="vote"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Yes'), '/answers/plus/' . $answer['id']) ?></div></div></td>
+                        <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/answers/minus/' . $answer['id']) ?></div></div></td>
                         <td width="100%">
                             <div class="answer">
                                 <?php echo $answer['comment']; ?>

@@ -31,6 +31,9 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     Router::connect('/questions/:id', array('controller' => 'questions', 'action' => 'view'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/plus/:id', array('controller' => 'answers', 'action' => 'plus'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/minus/:id', array('controller' => 'answers', 'action' => 'minus'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/answers/:id', array('controller' => 'answers', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/support/:id', array('controller' => 'questions', 'action' => 'support_key'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/confirm/:id', array('controller' => 'questions', 'action' => 'confirm'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/cities/:id', array('controller' => 'cities', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));
