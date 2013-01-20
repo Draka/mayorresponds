@@ -97,7 +97,20 @@
     ));
 
     echo $this->Form->end();
+    echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
     ?>
 </div>
+<?php $this->start( 'scripts_footer' ); ?>
+
+<script>
+    FB.Event.subscribe('auth.statusChange', function(response) {
+        FB.api('/me', function(response) {
+            $( '#VoteName' ).val( response.name );
+            $( '#VoteEmail' ).val( response.email );
+            $( '#VoteConfirm' ).val( 1 );
+        });
+    },true);
+</script>
+
 <?php
-?>
+$this->end();
