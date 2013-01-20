@@ -129,8 +129,12 @@ div.marco{
     box-shadow:  3px 3px 3px 3px rgba(125, 125, 125, 0.5);
 
 }
-div.questions{
+div.question-wrapper{
     position: fixed;
+    width: 500px;
+}
+
+div.questions{
     max-width: 450px;
     padding:10px 20px;
     margin:0 auto 0 auto;

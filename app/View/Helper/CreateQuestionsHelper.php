@@ -48,7 +48,8 @@ class CreateQuestionsHelper extends AppHelper {
 
     public function form() {
         ?>
-        <div class="questions form marco">
+        <div class="question-wrapper">
+            <div class="questions form marco">
             <h1><?php echo __('Make your Question') ?></h1>
             <?php
             echo $this->Form->create('Question', array('url' => '/questions/add'));
@@ -163,14 +164,14 @@ class CreateQuestionsHelper extends AppHelper {
                     });
                 });
             </script>
-        </div>
-        <div class="instructions">
-            <h2>How it works</h2>
-            <p>Quien no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, un simple u eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, Por favor sea mesurado y especifico, la ciudadania sabra agradecerlo.</p>
-            <p>Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
-            <h3><a href="">Post a question now!</a></h3>
-        </div>
-
+            </div>
+            <div class="instructions">
+                <h2>How it works</h2>
+                <p>Quien no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, un simple u eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, Por favor sea mesurado y especifico, la ciudadania sabra agradecerlo.</p>
+                <p>Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
+                <h3><a href="">Post a question now!</a></h3>
+            </div>
+        </div>    
         <?php
     }
 
