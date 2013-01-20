@@ -1,6 +1,7 @@
 <?php
 
 App::uses('AppController', 'Controller');
+App::uses('CakeEmail', 'Network/Email');
 
 /**
  * Questions Controller
@@ -10,6 +11,7 @@ App::uses('AppController', 'Controller');
 class QuestionsController extends AppController {
 
     public $helpers = array('CreateQuestions');
+    public $uses = array('Question', 'Support');
 
     /**
      * index method
@@ -29,18 +31,18 @@ class QuestionsController extends AppController {
      * @return void
      */
     public function view($id = null) {
-        $this->Question->id = $id;
-        if (!$this->Question->exists()) {
-            $this->Session->setFlash(__('The question does not exist or has been disabled'));
-            $this->redirect('/');
-        }
-        $this->set('question', $this->Question->find('first', array(
+        $question = $this->Question->find('first', array(
             'conditions' => array(
                 'Question.id' => $id,
                 'Question.active' => true,
                 'Question.confirm' => true,
             ),
-        )));
+                ));
+        if (!$question) {
+            $this->Session->setFlash(__('The question does not exist or has been disabled'));
+            $this->redirect('/');
+        }
+        $this->set('question', $question);
     }
 
     /**
@@ -127,23 +129,7 @@ class QuestionsController extends AppController {
      * @return void
      */
     public function edit($id = null) {
-        $this->Question->id = $id;
-        if (!$this->Question->exists()) {
-            throw new NotFoundException(__('Invalid question'));
-        }
-        if ($this->request->is('post') || $this->request->is('put')) {
-            if ($this->Question->save($this->request->data)) {
-                $this->Session->setFlash(__('The question has been saved'));
-                $this->redirect(array('action' => 'index'));
-            } else {
-                $this->Session->setFlash(__('The question could not be saved. Please, try again.'));
-            }
-        } else {
-            $this->request->data = $this->Question->read(null, $id);
-        }
-        $users = $this->Question->User->find('list');
-        $cities = $this->Question->City->find('list');
-        $this->set(compact('users', 'cities'));
+        throw new NotFoundException();
     }
 
     /**
@@ -155,19 +141,91 @@ class QuestionsController extends AppController {
      * @return void
      */
     public function delete($id = null) {
-        if (!$this->request->is('post')) {
-            throw new MethodNotAllowedException();
+        throw new NotFoundException();
+    }
+
+    public function support_key($key = null) {
+        if ($key) {
+            $support = $this->Support->find('first', array(
+                'conditions' => array(
+                    'Support.key_confirm' => $key,
+                ),
+                    ));
+            if ($support) {
+                unset($support['Support']['modified']);
+                $support['Support']['confirm'] = true;
+                $support['Support']['key_confirm'] = null;
+                $this->Support->save($support);
+                $this->Question->updateAll(
+                    array('Question.vote_plus' => 'Question.vote_plus + 1', 'Question.modified' => 'NOW()'),
+                    array('Question.id' => $support['Support']['question_id'])
+                );
+                $this->Session->setFlash(__('The support has been confimed'));
+                $this->redirect('/questions/' . $support['Support']['question_id']);
+            }else{
+                $this->Session->setFlash(__('The support does not exist or has been confirmed'));
+                $this->redirect('/');
+            }
         }
-        $this->Question->id = $id;
-        if (!$this->Question->exists()) {
-            throw new NotFoundException(__('Invalid question'));
+        throw new NotFoundException();
+    }
+
+    public function support($id = null) {
+        $question = $this->Question->find('first', array(
+            'conditions' => array(
+                'Question.id' => $id,
+                'Question.active' => true,
+                'Question.confirm' => true,
+            ),
+                ));
+        if (!$question) {
+            $this->Session->setFlash(__('The question does not exist or has been disabled'));
+            $this->redirect('/');
         }
-        if ($this->Question->delete()) {
-            $this->Session->setFlash(__('Question deleted'));
-            $this->redirect(array('action' => 'index'));
+        $this->set('question', $question);
+
+        if ($this->request->is('post')) {
+            //find user
+            $user = $this->Question->User->find('first', array(
+                'recursive' => -1,
+                'conditions' => array(
+                    'email' => $this->request->data['Support']['email']
+                    )));
+            if (!$user) {
+                $user = array();
+                $user['name'] = $this->request->data['Support']['name'];
+                $user['email'] = $this->request->data['Support']['email'];
+                $this->Question->User->create();
+                $user = $this->Question->User->save($user);
+                if (!$user) {
+                    $array = $this->Question->User->invalidFields();
+                    foreach ($array as $key => $value) {
+                        $this->Session->setFlash($value[0]);
+                    }
+                    $this->redirect(array('action' => 'add'));
+                }
+            }
+
+            $this->request->data['Support']['user_id'] = $user['User']['id'];
+            $this->request->data['Support']['question_id'] = $user['User']['id'];
+
+            $this->Support->create();
+            $support = $this->Support->save($this->request->data);
+            if ($this->Support->save($this->request->data)) {
+
+                $email = new CakeEmail();
+                $email->from(array('alert@example.com' => 'Mayor Responds'));
+                $email->replyTo('no-reply@example.com', 'Mayor Responds - No reply');
+                $email->to($user['User']['email'], $user['User']['name']);
+                $email->subject('Confirm Vote, please');
+                $email->send('Please confirm your support in the url: ' . SITE . '/support/' . $support['Support']['key_confirm']);
+
+                $this->Session->setFlash(__('The support has been received'));
+                $this->redirect('/questions/' . $this->request->data['Support']['question_id']);
+            } else {
+                $this->Session->setFlash(__('The support could not be saved. Please, try again.'));
+            }
         }
-        $this->Session->setFlash(__('Question was not deleted'));
-        $this->redirect(array('action' => 'index'));
     }
 
 }

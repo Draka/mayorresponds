@@ -31,6 +31,7 @@
  */
 	Router::connect('/pages/*', array('controller' => 'pages', 'action' => 'display'));
     Router::connect('/questions/:id', array('controller' => 'questions', 'action' => 'view'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/support/:id', array('controller' => 'questions', 'action' => 'support_key'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/cities/:id', array('controller' => 'cities', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));
 
 

@@ -3,11 +3,11 @@
 App::uses('AppModel', 'Model');
 
 /**
- * Vote Model
+ * Support Model
  *
  * @property User $User
  */
-class Vote extends AppModel {
+class Support extends AppModel {
 
     /**
      * Display field
@@ -32,7 +32,7 @@ class Vote extends AppModel {
             //'on' => 'create', // Limit validation to 'create' or 'update' operations
             ),
         ),
-        'answer_id' => array(
+        'question_id' => array(
             'numeric' => array(
                 'rule' => array('numeric'),
             //'message' => 'Your custom message here',
@@ -52,9 +52,9 @@ class Vote extends AppModel {
      * @var array
      */
     public $belongsTo = array(
-        'Answer' => array(
-			'className' => 'Answer',
-			'foreignKey' => 'answer_id',
+        'Question' => array(
+			'className' => 'Question',
+			'foreignKey' => 'question_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
@@ -69,8 +69,8 @@ class Vote extends AppModel {
     );
 
     public function beforeSave($options = array()) {
-        if (empty($this->data['Vote']['id'])) {
-            $this->data['Vote']['key_confirm'] = substr(md5(time()), 0, 16);
+        if (empty($this->data['Support']['id'])) {
+            $this->data['Support']['key_confirm'] = substr(md5(time()), 0, 16);
         }
 
         return true;

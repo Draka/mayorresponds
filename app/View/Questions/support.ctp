@@ -1,12 +1,10 @@
 <?php
 if ($question) {
-
     ?>
     <div class="marco form cleanTop50">
         <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
         <table cellpadding="0" cellspacing="0" class="tQuestion">
             <tr>
-                <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
                 <td width="100%">
 
                     <div class="question">
@@ -74,28 +72,9 @@ if ($question) {
 
     </div>
     <div class="questions form marco cleanTop50">
-        <h1><?php echo __('Do you think this question has already been answered?') ?></h1>
+        <h1><?php echo __('I want to support this question for the mayor responds') ?></h1>
         <?php
-        echo $this->Form->create('Answer', array('url' => '/answers/add'));
-
-        echo $this->Form->input('question_id', array(
-            'type' => 'hidden',
-            'value' => $question['Question']['id']
-        ));
-
-        echo $this->Form->input('comment', array(
-            'type' => 'text',
-            'label' => __('Comment:'),
-            'class' => 'required',
-            'div' => array('class' => 'input required')
-        ));
-
-        echo $this->Form->input('url', array(
-            'type' => 'text',
-            'label' => __('Url:'),
-            'class' => 'required',
-            'div' => array('class' => 'input required')
-        ));
+        echo $this->Form->create('Support', array('url' => '/questions/support/' . $question['Question']['id']));
 
         echo $this->Form->input('name', array(
             'type' => 'text',
