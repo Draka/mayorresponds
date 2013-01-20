@@ -29,9 +29,7 @@ class CreateQuestionsHelper extends AppHelper {
                                     <?php echo $this->Html->link(sprintf( '%s\'s mayor: %s',  $question['City']['name'], $question['Question']['question']), '/questions/' . $question['Question']['id']); ?>
                                 </div>
                                 <div class="meta">
-                                    <?php echo $question['City']['country_code']; ?>
-                                    [<?php echo $question['Question']['created']; ?>]
-
+                                    <small>by <?php echo $question['User']['name']; ?>, from <?php echo $question['City']['country_code']; ?>. Created:  <?php echo $question['Question']['created']; ?>.</small>
                                 </div>
                             </td>
                             <td><div class="report"><?php echo $this->Html->link(__('Report'), '/questions/report/' . $question['Question']['id']) ?></div></td>
