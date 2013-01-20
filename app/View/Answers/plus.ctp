@@ -1,46 +1,7 @@
-<?php ?>
-<div class="marco form cleanTop50">
-    <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
-    <table cellpadding="0" cellspacing="0" class="tQuestion">
-        <tr>
-            <td width="100%">
+<?php
+$this->CreateQuestions->details($question);
+?>
 
-                <div class="question">
-                    <?php echo $this->Html->link($question['Question']['question'], '/questions/' . $question['Question']['id']); ?>
-                </div>
-                <div class="meta">
-                    <?php echo $question['City']['name']; ?> -
-                    <?php echo $question['City']['country_code']; ?>
-                    [<?php echo $question['Question']['created']; ?>]
-
-                </div>
-            </td>
-            <td><div class="report"><?php echo $this->Html->link(__('Report'), '/questions/report/' . $question['Question']['id']) ?></div></td>
-        </tr>
-        <tr>
-            <td colspan="3">
-                <!-- AddThis Button BEGIN -->
-                <div class="addthis_toolbox addthis_default_style addthis_32x32_style"
-                     addthis:url="http://www.mayorresponds.org/questions/<?php echo $question['Question']['id'] ?>"
-                     addthis:title="<?php echo __('Mayor of %s please answer:', $question['City']['name']) ?>"
-                     addthis:description="<?php echo str_replace('"', "'", $question['Question']['question']) ?>">
-                    <a class="addthis_button_preferred_1"></a>
-                    <a class="addthis_button_preferred_2"></a>
-                    <a class="addthis_button_preferred_3"></a>
-                    <a class="addthis_button_preferred_4"></a>
-                    <a class="addthis_button_compact"></a>
-                    <a class="addthis_counter addthis_bubble_style"></a>
-                </div>
-                <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
-                <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-50fb6bb5384fffe9"></script>
-                <!-- AddThis Button END -->
-            </td>
-        </tr>
-
-    </table>
-
-
-</div>
 
 <div class="marco form cleanTop50">
     <h1><?php echo __('Answer') ?></h1>
@@ -97,7 +58,7 @@
     ));
 
     echo $this->Form->end();
-    echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
+    echo $this->Facebook->login(array('perms' => 'email,publish_stream', 'width' => '400'));
     ?>
 </div>
 <?php $this->start( 'scripts_footer' ); ?>

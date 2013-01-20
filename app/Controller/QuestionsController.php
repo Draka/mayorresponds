@@ -19,8 +19,9 @@ class QuestionsController extends AppController {
      * @return void
      */
     public function index() {
-        $this->Question->recursive = 0;
-        $this->set('questions', $this->paginate());
+        $title_for_layout = __('Last questions');
+        $questions=$this->Question->findLast(20);
+		$this->set(compact('title_for_layout', 'questions'));
     }
 
     /**
@@ -41,7 +42,8 @@ class QuestionsController extends AppController {
             $this->Session->setFlash(__('The question does not exist or has been disabled'));
             $this->redirect('/');
         }
-        $this->set('question', $question);
+        $title_for_layout = $question['Question']['question'];
+        $this->set(compact('title_for_layout', 'question'));
     }
 
     /**

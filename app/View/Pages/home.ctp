@@ -1,6 +1,5 @@
 <?php
 
-//echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
 $this->CreateQuestions->form();
 
 $this->CreateQuestions->listAll($questions);
