@@ -6,7 +6,7 @@ if ($question) {
         <h1><?php echo __('Mayor of %s please answer:', $question['City']['name']) ?></h1>
         <table cellpadding="0" cellspacing="0" class="tQuestion">
             <tr>
-                <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
+                <td><div class="vote"><div class="num"><?php echo $question['Question']['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('I support'), '/questions/support/' . $question['Question']['id']) ?></div></div></td>
                 <td width="100%">
 
                     <div class="question">
@@ -50,7 +50,7 @@ if ($question) {
                 <table cellpadding="0" cellspacing="0" class="tAnswer">
                     <tr>
                         <td><div class="vote"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('Yes'), '/plus/' . $answer['id']) ?></div></div></td>
-                        <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_plus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/minus/' . $answer['id']) ?></div></div></td>
+                        <td><div class="vote vote_no"><div class="num"><?php echo $answer['vote_minus']; ?></div><div class="text"><?php echo $this->Html->link(__('No'), '/minus/' . $answer['id']) ?></div></div></td>
                         <td width="100%">
                             <div class="answer">
                                 <?php echo $answer['comment']; ?>
@@ -81,6 +81,11 @@ if ($question) {
         echo $this->Form->input('question_id', array(
             'type' => 'hidden',
             'value' => $question['Question']['id']
+        ));
+
+        echo $this->Form->input('confirm', array(
+            'type' => 'hidden',
+            'value' => '0'
         ));
 
         echo $this->Form->input('comment', array(
@@ -119,8 +124,21 @@ if ($question) {
         ));
 
         echo $this->Form->end();
+
+        echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
         ?>
     </div>
+    <?php $this->start( 'scripts_footer' ) ?>
+        <script>
+            FB.Event.subscribe('auth.statusChange', function(response) {
+                FB.api('/me', function(response) {
+                    $( '#AnswerName' ).val( response.name );
+                    $( '#AnswerEmail' ).val( response.email );
+                    $( '#AnswerConfirm' ).val( 1 );
+                });
+            },true);
+        </script>
+    <?php $this->end( ) ?>
     <?php
 } else {
     $this->CreateQuestions->form();

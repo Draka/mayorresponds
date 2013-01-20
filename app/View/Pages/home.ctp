@@ -14,6 +14,7 @@ $this->start( 'scripts_footer' );
         FB.api('/me', function(response) {
             $( '#QuestionName' ).val( response.name );
             $( '#QuestionEmail' ).val( response.email );
+            $( '#QuestionConfirm' ).val( 1 );
             $( '#QuestionDisplayForm input[type="submit"]' ).show();
         });
     },true);

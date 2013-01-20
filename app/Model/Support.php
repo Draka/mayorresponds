@@ -69,7 +69,7 @@ class Support extends AppModel {
     );
 
     public function beforeSave($options = array()) {
-        if (empty($this->data['Support']['id'])) {
+        if (empty($this->data['Support']['id']) && empty($this->data['Support']['confirm'])) {
             $this->data['Support']['key_confirm'] = substr(md5(time()), 0, 16);
         }
 

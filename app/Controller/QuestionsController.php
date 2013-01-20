@@ -247,7 +247,7 @@ class QuestionsController extends AppController {
                     )));
             if ($support) {
                 $this->Session->setFlash(__('You already supported this question.'));
-                $this->redirect('/');
+                $this->redirect('/questions/' . $id);
             }
 
             $this->request->data['Support']['user_id'] = $user['User']['id'];
@@ -255,17 +255,24 @@ class QuestionsController extends AppController {
 
             $this->Support->create();
             $support = $this->Support->save($this->request->data);
-            if ($this->Support->save($this->request->data)) {
+            if ($support) {
+                if (empty($support['Support']['confirm'])) {
+                    $email = new CakeEmail();
+                    $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
+                    $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
+                    $email->to($user['User']['email'], $user['User']['name']);
+                    $email->subject('Confirm Support, please');
+                    $email->send('Please confirm your support in the url: ' . SITE . 'support/' . $support['Support']['key_confirm']);
 
-                $email = new CakeEmail();
-                $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
-                $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
-                $email->to($user['User']['email'], $user['User']['name']);
-                $email->subject('Confirm Support, please');
-                $email->send('Please confirm your support in the url: ' . SITE . 'support/' . $support['Support']['key_confirm']);
-
-                $this->Session->setFlash(__('The support has been received, check your email to confirm.'));
-                $this->redirect('/questions/' . $this->request->data['Support']['question_id']);
+                    $this->Session->setFlash(__('The support has been received, check your email to confirm.'));
+                    $this->redirect('/questions/' . $id);
+                } else {
+                    $this->Question->updateAll(
+                            array('Question.vote_plus' => 'Question.vote_plus + 1', 'Question.modified' => 'NOW()'), array('Question.id' => $id)
+                    );
+                    $this->Session->setFlash(__('The support has been saved.'));
+                    $this->redirect('/questions/' . $id);
+                }
             } else {
                 $this->Session->setFlash(__('The support could not be saved. Please, try again.'));
             }

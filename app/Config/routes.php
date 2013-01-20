@@ -33,6 +33,8 @@
     Router::connect('/questions/:id', array('controller' => 'questions', 'action' => 'view'), array('pass' => array('id'), 'id' => '[1-9]*'));
     Router::connect('/plus/:id', array('controller' => 'answers', 'action' => 'plus'), array('pass' => array('id'), 'id' => '[1-9]*'));
     Router::connect('/minus/:id', array('controller' => 'answers', 'action' => 'minus'), array('pass' => array('id'), 'id' => '[1-9]*'));
+    Router::connect('/vote/:id', array('controller' => 'answers', 'action' => 'vote_key'), array('pass' => array('id'), 'id' => '.*'));
+    Router::connect('/answers/add', array('controller' => 'answers', 'action' => 'add'));
     Router::connect('/answers/:id', array('controller' => 'answers', 'action' => 'view'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/support/:id', array('controller' => 'questions', 'action' => 'support_key'), array('pass' => array('id'), 'id' => '.*'));
     Router::connect('/confirm/:id', array('controller' => 'questions', 'action' => 'confirm'), array('pass' => array('id'), 'id' => '.*'));
