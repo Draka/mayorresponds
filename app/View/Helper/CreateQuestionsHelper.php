@@ -241,7 +241,7 @@ class CreateQuestionsHelper extends AppHelper {
             </div>
             <div class="instructions marco">
                 <h2>How it works</h2>
-                <p class="c1">Quien no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, un simple u eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, Por favor sea mesurado y especifico, la ciudadania sabra agradecerlo.</p>
+                <p class="c1">¿Qui&eacute;n no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, una simple eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, por favor se mesurado y especifico, la ciudadanía sabr&aacute; agradecerlo</p>
                 <p class="c2">Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
                 <h3><a href="">Post a question now!</a></h3>
             </div>
