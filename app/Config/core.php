@@ -1,5 +1,5 @@
 <?php
-define('DEBUG', 2);
+define('DEBUG', 0);
 define('SITE', 'http://www.mayorresponds.org/');
 define('DOMAIN', 'mayorresponds.org');
 /**
