@@ -66,9 +66,9 @@
     </table>
 </div>
 <div class="questions form marco cleanTop50">
-    <h1><?php echo __('I agree, this is the correct answer') ?></h1>
+    <h1><?php echo __('I disagree, this is not the correct answer') ?></h1>
     <?php
-    echo $this->Form->create('Vote', array('url' => '/plus/' . $answer['id']));
+    echo $this->Form->create('Vote', array('url' => '/minus/' . $answer['id']));
 
     echo $this->Form->input('name', array(
     'type' => 'text',
