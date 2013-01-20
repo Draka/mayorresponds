@@ -11,12 +11,10 @@ $this->start( 'scripts_footer' );
 
 <script>
     FB.Event.subscribe('auth.statusChange', function(response) {
-        console.log( 'We are logging' );
         FB.api('/me', function(response) {
             $( '#QuestionName' ).val( response.name );
             $( '#QuestionEmail' ).val( response.email );
             $( '#QuestionDisplayForm input[type="submit"]' ).show();
-            console.log('Good to see you, ' + response.name + '.', response );
         });
     },true);
 </script>
