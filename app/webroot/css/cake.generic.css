@@ -28,6 +28,7 @@ body {
 	font-family:'lucida grande',verdana,helvetica,arial,sans-serif;
 	font-size:90%;
 	margin: 0;
+    background: url(../img/bg2.jpg);
 }
 a {
 	color: #003d4c;
@@ -46,9 +47,8 @@ h1, h2, h3, h4 {
 	margin-bottom:0.5em;
 }
 h1 {
-	background:#fff;
 	color: #003d4c;
-	font-size: 100%;
+	font-size: 180%;
 }
 h2 {
 	background:#fff;
@@ -103,6 +103,8 @@ p {
 	color: #333;
 	padding: 10px 20px 40px 20px;
 	overflow: auto;
+    background: url(../img/bg-wrapper.jpg);
+    border: 1px #F00 solid;
 }
 #footer {
 	clear: both;
@@ -113,20 +115,62 @@ p {
 /** containers **/
 div.form,
 div.index,
-div.view {
-	float:right;
-	width:76%;
-	border-left:1px solid #666;
-	padding:10px 2%;
+div.view{
+    max-width: 450px;
+	padding:10px 20px;
+    margin:0 auto 0 auto;
+    border: 1px #000 solid;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow:  3px 3px 3px 3px rgba(125, 125, 125, 0.5);
+    box-shadow:  3px 3px 3px 3px rgba(125, 125, 125, 0.5);
 }
 div.actions {
-	float:left;
-	width:16%;
+	max-width: 450px;
 	padding:10px 1.5%;
+    margin:0 auto 0 auto;
 }
 div.actions h3 {
 	padding-top:0;
 	color:#777;
+}
+div.menu {
+	max-width: 450px;
+	padding: 0;
+    margin:0 auto;
+}
+
+.menu td{
+    padding: 0;
+    margin: 0;
+}
+.menu td{
+    text-align: center;
+    border: none;
+    color: #FFF;
+}
+.menu a{
+    color: #FFF;
+    text-decoration: none;
+}
+.menu a:hover{
+    color: #F00000;
+    text-decoration: none;
+}
+
+.logo  {
+	height: 30px;
+	margin-top: 1px;
+	color: #ddd;
+	text-decoration: none;
+	font-size: 28px;
+	line-height: 30px;
+	margin-left: 0;
+}
+
+.logo span {
+	color: #f16529;
 }
 
 
@@ -492,15 +536,14 @@ p.error em {
 	padding: 0;
 }
 .actions li {
-	margin:0 0 0.5em 0;
+	margin:0;
 	list-style-type: none;
 	white-space: nowrap;
 	padding: 0;
+    display: inline;
 }
 .actions ul li a {
 	font-weight: normal;
-	display: block;
-	clear: both;
 }
 
 /* Buttons and button links */

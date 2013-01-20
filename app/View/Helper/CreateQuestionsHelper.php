@@ -8,9 +8,10 @@ class CreateQuestionsHelper extends AppHelper {
     public function form() {
         ?>
         <div class="questions form">
+            <h1><?php echo __('Make your Question')?></h1>
             <?php
             echo $this->Form->create('Question', array('url' => '/questions/add'));
-
+            
             echo $this->Form->input('search_city', array(
                 'type' => 'text',
                 'label' => __('City:'),
