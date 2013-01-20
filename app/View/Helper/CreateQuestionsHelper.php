@@ -8,7 +8,7 @@ class CreateQuestionsHelper extends AppHelper {
     public function listAll($questions) {
         if (count($questions)) {
             ?>
-            <div class="marco form cleanTop50">
+            <div class="marco right-col">
                 <h1><?php echo __('Lasted questions') ?></h1>
                 <?php foreach ($questions as $question): ?>
                     <table cellpadding="0" cellspacing="0" class="tQuestion">
@@ -49,7 +49,7 @@ class CreateQuestionsHelper extends AppHelper {
     public function form() {
         ?>
         <div class="question-wrapper">
-            <div class="questions form marco">
+            <div class="questions marco">
             <h1><?php echo __('Make your Question') ?></h1>
             <?php
             echo $this->Form->create('Question', array('url' => '/questions/add'));
