@@ -52,6 +52,7 @@ class QuestionsController extends AppController {
      * @return void
      */
     public function add() {
+        die;
         if ($this->request->is('post')) {
 //find user
             $user = $this->Question->User->find('first', array(

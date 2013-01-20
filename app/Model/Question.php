@@ -113,7 +113,7 @@ class Question extends AppModel {
         return true;
     }
 
-    public function findLast($limit = 10){
+    public function findLast($limit = 50){
         return $this->find('all',array(
             'recursive' => 1,
             'conditions' => array(
