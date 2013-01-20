@@ -56,7 +56,6 @@ class AnswersController extends AppController {
      * @return void
      */
     public function add() {
-        pr(3);die;
         if ($this->request->is('post')) {
             //find user
             $user = $this->Answer->User->find('first', array(
@@ -80,7 +79,7 @@ class AnswersController extends AppController {
             }
             //find question
 
-            $question = $this->Answer->User->find('first', array(
+            $question = $this->Answer->Question->find('first', array(
                 'recursive' => -1,
                 'conditions' => array(
                     'id' => $this->request->data['Answer']['question_id']
@@ -95,15 +94,20 @@ class AnswersController extends AppController {
             $this->Answer->create();
             $answer = $this->Answer->save($this->request->data);
             if ($answer) {
-                $email = new CakeEmail();
-                $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
-                $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
-                $email->to($user['User']['email'], $user['User']['name']);
-                $email->subject('Confirm answer, please');
-                $email->send('Please confirm your answer in the url: ' . SITE . 'answer/' . $answer['Answer']['key_confirm']);
+                if (empty($answer['Answer']['confirm'])) {
+                    $email = new CakeEmail();
+                    $email->from(array('alert@' . DOMAIN => 'Mayor Responds'));
+                    $email->replyTo('no-reply@' . DOMAIN, 'Mayor Responds - No reply');
+                    $email->to($user['User']['email'], $user['User']['name']);
+                    $email->subject('Confirm answer, please');
+                    $email->send('Please confirm your answer in the url: ' . SITE . 'answer/' . $answer['Answer']['key_confirm']);
 
-                $this->Session->setFlash(__('The answer has been saved, please check your email to confirm.'));
-                $this->redirect('/questions/' . $this->request->data['Answer']['question_id']);
+                    $this->Session->setFlash(__('The answer has been saved, please check your email to confirm.'));
+                    $this->redirect('/questions/' . $this->request->data['Answer']['question_id']);
+                } else {
+                    $this->Session->setFlash(__('The answer has been saved.'));
+                    $this->redirect('/questions/' . $answer['Answer']['question_id']);
+                }
             } else {
                 $this->Session->setFlash(__('The answer could not be saved. Please, try again.'));
             }
@@ -154,7 +158,7 @@ class AnswersController extends AppController {
         }
         $question = $this->Question->find('first', array(
             'conditions' => array(
-                'Question.id' => $id,
+                'Question.id' => $answer['Answer']['question_id'],
                 'Question.active' => true,
                 'Question.confirm' => true,
                 )));
@@ -201,7 +205,7 @@ class AnswersController extends AppController {
             $this->request->data['Vote']['answer_id'] = $id;
             if ($plus) {
                 $this->request->data['Vote']['vote_plus'] = 1;
-            }else{
+            } else {
                 $this->request->data['Vote']['vote_minus'] = 1;
             }
 

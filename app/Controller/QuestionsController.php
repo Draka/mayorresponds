@@ -247,7 +247,7 @@ class QuestionsController extends AppController {
                     )));
             if ($support) {
                 $this->Session->setFlash(__('You already supported this question.'));
-                $this->redirect('/');
+                $this->redirect('/questions/' . $id);
             }
 
             $this->request->data['Support']['user_id'] = $user['User']['id'];
