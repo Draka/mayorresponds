@@ -1020,6 +1020,8 @@ box-shadow:0px 0px 10px 2px #777777;
     }
     .right-col {
         width: 100%;
+        padding: 10px 2px;
+        margin-left: 0px;
 
     }
 }
