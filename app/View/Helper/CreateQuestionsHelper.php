@@ -3,7 +3,7 @@ App::uses('Helper', 'View');
 
 class CreateQuestionsHelper extends AppHelper {
 
-    public $helpers = array('Html', 'Form');
+    public $helpers = array('Html', 'Form', 'Facebook.Facebook');
 
     public function listAll($questions) {
         if (count($questions)) {
@@ -90,10 +90,13 @@ class CreateQuestionsHelper extends AppHelper {
                 'div' => array('class' => 'input required')
             ));
 
+
             echo $this->Form->input(__('Post your question'), array(
                 'type' => 'submit',
-                'label' => false,
+                'label' => false
             ));
+
+            echo $this->Facebook->login(array('perms' => 'email,publish_stream'));
 
             echo $this->Form->end();
             ?>
@@ -156,6 +159,13 @@ class CreateQuestionsHelper extends AppHelper {
                 });
             </script>
         </div>
+        <div class="instructions">
+            <h2>How it works</h2>
+            <p>Quien no ha querido hacerle preguntas a su Alcalde? Por eso creamos esto para ti, un simple u eficaz manera de dirigir nuestras inquietudes de una forma directa a nuestro alcalde, Por favor sea mesurado y especifico, la ciudadania sabra agradecerlo.</p>
+            <p>Who has not wanted to ask your mayor? For that We did it, A simple and efficient way to send questions to our Mayor, Please be measured and specific, the citizens will know to thank you.</p>
+            <h3><a href="">Post a question now!</a></h3>
+        </div>
+
         <?php
     }
 
